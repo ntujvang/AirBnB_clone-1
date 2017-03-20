@@ -2,6 +2,8 @@
 
 **Purpose**
 
+This version is a fork of a project made by Phillip and Jianqin that has been authorized by Holberton School staff for all sutdents of Fall 2016 to use to coninue their studies on databasing!!!
+
 The purpose of this project is to recreate the AirBnB site, from the back-end data management to the front-end user interface. 
 
 The project is currently in its first phase, where we are creating a command line interpretor to access objects that will store user data. Users can use the console to create objects, update object attributes, remove objects, list all objects, and store and read data from a .json file.
@@ -11,7 +13,7 @@ The project is currently in its first phase, where we are creating a command lin
 **Authors**
 - **Philip Yoo**, \<philip.yoo@holbertonschool.com>, @philipYoo10
 - **Jianqin Wang**, \<jianqin.wang@holbertonschool.com>, @jianqinwang94
-
+- **Ntuj Vang***, \<96@holbertonschool.com>, @yogmazoophem
 ----------------------------------------
 
 In order to begin the console, you can run either 'python3 console.py' or './console.py' in the command line.
