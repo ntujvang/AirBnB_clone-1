@@ -25,11 +25,12 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, args):
         """Create a new Basemodel"""
         args = args.split()
-        if len(args) != 1:
-            print("** clas name missing **")
+        if len(args) < 1:
+            print("** class name missing **")
         else:
             if len(args) > 0 and args[0] in HBNBCommand.valid_classes:
                 new_obj = eval(args[0])()
+                new_obj = class_attr(new_obj, args)
                 print(new_obj.id)
                 new_obj.save()
             else:
@@ -227,6 +228,29 @@ class HBNBCommand(cmd.Cmd):
                 return
         else:
             print("Not a valid command")
+
+
+def class_attr(new_obj, args):
+    for key in args:
+        if '=' in key:
+            key = key.split('=')
+            name = key[0]
+            value = key[1]
+            if key[1][0] == '"' and key[1][-1] == '"':
+                value = key[1][1:-1]
+                value = value.replace('_', ' ')
+                setattr(new_obj, name, value)
+            else:
+                try:
+                    value = int(value)
+                    setattr(new_obj, name, value)
+                except ValueError:
+                    try:
+                        value = float(value)
+                        setattr(new_obj, name, value)
+                    except ValueError:
+                        pass
+    return new_obj
 
 
 if __name__ == '__main__':
