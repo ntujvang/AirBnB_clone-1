@@ -20,19 +20,19 @@ class BaseModel:
         updated_at = Column(DateTime(), default=datetime.now(), nullable=False)
 
     def __init__(self, *args, **kwargs):
-        """initialize class object"""
-        if getenv('HBNB_TYPE_STORAGE') != 'db':
-            if len(args) > 0:
-                for k in args[0]:
-                    setattr(self, k, args[0][k])
-        for name, value in kwargs.items():
-            setattr(self, name, value)
-        if not hasattr(self, 'created_at'):
+        """initialize class object
+        MUST FIX THIS INIT METHOD
+        """
+        if len(args) > 0:
+            for k in args[0]:
+                setattr(self, k, args[0][k])
+        else:
             self.created_at = datetime.now()
-        if not hasattr(self, 'id'):
+            self.updated_at = datetime.now()
             self.id = str(uuid.uuid4())
-        for k in kwargs:
-            print("kwargs: {}: {}".format(k, kwargs[k]))
+        if kwargs is not None:
+            for name, value in kwargs.items():
+                setattr(self, name, value)
 
     def save(self):
         """method to update self"""
@@ -48,11 +48,12 @@ class BaseModel:
     def to_json(self):
         """convert to json"""
         dupe = self.__dict__.copy()
+        if ("_sa_instance_state" in dupe):
+            dupe.pop("_sa_instance_state", None)
         dupe["created_at"] = str(dupe["created_at"])
         if ("updated_at" in dupe):
             dupe["updated_at"] = str(dupe["updated_at"])
         dupe["__class__"] = type(self).__name__
-        dupe.pop("_sa_instance_state", None)
         return dupe
 
     def delete(self):
