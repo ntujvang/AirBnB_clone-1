@@ -231,6 +231,10 @@ class HBNBCommand(cmd.Cmd):
 
 
 def class_attr(new_obj, args):
+    """
+    This method aids in providing additional information for each
+    valid classes. It accepts an unlimited amount of params per creation.
+    """
     for key in args:
         if '=' in key:
             key = key.split('=')
