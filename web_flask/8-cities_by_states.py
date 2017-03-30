@@ -11,7 +11,7 @@ def cities_by_states():
 
 
 @app.teardown_appcontext
-def teardown():
+def teardown(exc):
     storage.close()
 
 
