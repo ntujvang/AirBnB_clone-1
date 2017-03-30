@@ -4,7 +4,7 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 
-@app.route('/states_list/')
+@app.route('/states_list')
 def states_list():
     states = storage.all("State")
     return render_template("7-states_list.html", states=states)
