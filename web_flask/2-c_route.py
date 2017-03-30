@@ -13,7 +13,7 @@ def hbnb():
         return "HBNB"
 
 
-@ap.route('/c/<text>')
+@app.route('/c/<text>')
 def c(text):
     text = text.replace('_', ' ')
     return "C {}".format(text)
