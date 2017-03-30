@@ -9,8 +9,8 @@ def hello_hbnb():
 
 
 @app.route('/hbnb'):
-    def hbnb():
-        return "HBNB!"
+def hbnb():
+        return "HBNB"
 
 
 @ap.route('/c/<text>')
