@@ -10,12 +10,12 @@ def states():
     return render_template("9-states.html", states=states)
 
 
-@app.route('/states/<uuid>')
-def states_wid(uuid):
+@app.route('/states/<id>')
+def states_wid(id):
     states = storage.all("State")
     found = ""
     for ids in states:
-        if ids == uuid:
+        if ids == id:
             found = states[ids]
     return render_template("9-states.html", state=found)
 
@@ -26,4 +26,4 @@ def teardown(self):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='5000')
+    app.run(host='0.0.0.0', port=5000)
