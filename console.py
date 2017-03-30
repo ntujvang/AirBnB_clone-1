@@ -28,7 +28,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args) < 1:
             print("** class name missing **")
         else:
-            if len(args) > 0 and args[0] in HBNBCommand.valid_classes:
+            if len(args) > 1 and args[0] in HBNBCommand.valid_classes:
                 new_obj = eval(args[0])()
                 new_obj = class_attr(new_obj, args)
                 print(new_obj.id)
@@ -229,32 +229,32 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("Not a valid command")
 
-
-def class_attr(new_obj, args):
-    """
-    This method aids in providing additional information for each
-    valid classes. It accepts an unlimited amount of params per creation.
-    """
-    for key in args:
-        if '=' in key:
-            key = key.split('=')
-            name = key[0]
-            value = key[1]
-            if key[1][0] == '"' and key[1][-1] == '"':
-                value = key[1][1:-1]
-                value = value.replace('_', ' ')
-                setattr(new_obj, name, value)
-            else:
-                try:
-                    value = int(value)
+    @staticmethod
+    def class_attr(new_obj, args):
+        """
+        This method aids in providing additional information for each
+        valid classes. It accepts an unlimited amount of params per creation.
+        """
+        for key in args:
+            if '=' in key:
+                key = key.split('=')
+                name = key[0]
+                value = key[1]
+                if key[1][0] == '"' and key[1][-1] == '"':
+                    value = key[1][1:-1]
+                    value = value.replace('_', ' ')
                     setattr(new_obj, name, value)
-                except ValueError:
+                else:
                     try:
-                        value = float(value)
+                        value = int(value)
                         setattr(new_obj, name, value)
                     except ValueError:
-                        pass
-    return new_obj
+                        try:
+                            value = float(value)
+                            setattr(new_obj, name, value)
+                        except ValueError:
+                            pass
+        return new_obj
 
 
 if __name__ == '__main__':

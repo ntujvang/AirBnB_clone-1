@@ -12,7 +12,13 @@ class FileStorage:
         self.reload()
 
     def all(self, cls=None):
-        return FileStorage.__objects
+        if cls is None:
+            return FileStorage.__objects
+        hold = {}
+        for key, value in FileStorage.__objects.items():
+            if value.__class__.__name__ == cls:
+                hold[key] = value
+        return hold
 
     def new(self, obj):
         if obj is not None:
@@ -45,3 +51,6 @@ class FileStorage:
     def delete(self, obj=None):
         if hasattr(obj, '__object'):
             del obj
+
+    def close(self):
+        self.reload()

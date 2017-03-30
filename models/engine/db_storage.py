@@ -9,6 +9,7 @@ from models.state import State
 from models.place import PlaceAmenity, Place
 from models.review import Review
 from models.user import User
+from sqlalchemy.orm.scoping import scoped_session
 
 
 class DBStorage:
@@ -37,11 +38,11 @@ class DBStorage:
     def all(self, cls=None):
         objs = {}
         if cls is None:
-            for name, value in self.classes.items():
-                for instance in self.__session.query(value):
+            for name  in self.classes.items():
+                for instance in self.__session.query(eval(name)):
                     objs[instance.id] = instance
         else:
-            for instance in self.__session.query(cls):
+            for instance in self.__session.query(eval(cls)):
                 objs[instance.id] = instance
         return objs
 
@@ -55,6 +56,8 @@ class DBStorage:
         self.__session.delete(obj)
 
     def reload(self):
-        Session = sessionmaker(bind=self.__engine)
         Base.metadata.create_all(self.__engine)
-        self.__session = Session()
+        self.__session = scoped_session(sessionmaker(bind=self.__engine))
+
+    def close(self):
+        self.__session.remove()
