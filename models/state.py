@@ -6,6 +6,7 @@ from sqlalchemy.orm import relationship, backref
 from models.base_model import BaseModel, Base
 import models
 
+
 class State(BaseModel, Base):
     if getenv('HBNB_TYPE_STORAGE') == 'db':
         __tablename__ = "states"

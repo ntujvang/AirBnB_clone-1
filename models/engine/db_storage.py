@@ -38,7 +38,7 @@ class DBStorage:
     def all(self, cls=None):
         objs = {}
         if cls is None:
-            for name  in self.classes.items():
+            for name in self.classes.items():
                 for instance in self.__session.query(eval(name)):
                     objs[instance.id] = instance
         else:
