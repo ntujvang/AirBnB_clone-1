@@ -10,7 +10,7 @@ def hello_hbnb():
 
 @app.route('/hbnb')
 def hbnb():
-    return "HBNB!"
+    return "HBNB"
 
 
 @app.route('/c/<text>')
@@ -41,5 +41,5 @@ def odd_or_even(n):
     return render_template("6-number_odd_or_even.html", n=n)
 
 
-if __name___ == '__main__':
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port='5000')
