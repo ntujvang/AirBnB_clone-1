@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <link rel="shortcut icon" type="image/x-icon" href="../static/images/icon.png"/>
+  <link rel="stylesheet" href="../static/styles/4-common.css"/>
+  <link rel="stylesheet" href="../static/styles/3-header.css"/>
+  <link rel="stylesheet" href="../static/styles/3-footer.css"/>
+  <link rel="stylesheet" href="../static/styles/6-filters.css"/>
+  </head>
+  <body>
+    <header>
+      <div class="logo"></div>
+    </header>
+    <div class="container">
+      <section class="filters">
+	<div class="locations">
+	  <h3>States</h3>
+	  <h4>&nbsp</h4>
+	  <ul class="popover">
+            {% for s in states.values()|sort(attribute='name') %}
+	    <li><h2>{{ s.name }}</h2>
+            {% for c in states.cities|sort(attribute='name') %}
+	    <li>{{ c.name }}</li>
+            {% endfor %}
+	    </li>
+            {% endfor %}
+	  </ul>
+	</div>
+	<div class="amenities">
+	  <h3>Amenities</h3>
+	  <h4>&nbsp</h4>
+	  <ul class="popover">
+	    {% for a in amenities.values()|sort(attribute='name') %}
+	    <li>{{ a.name }}</li>
+	    {% endfor %}
+	  </ul>
+	</div>
+	<button>
+	  Search
+	</button>
+      </section>
+     </div>
+    <footer>
+      Holberton School
+    </footer>
+  </body>
+</html>
