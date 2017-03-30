@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 from flask import Flask, render_template
+app = Flask(__name__)
 
 
 @app.route('/')
@@ -9,7 +10,7 @@ def hello_hbnb():
 
 @app.route('/hbnb')
 def hbnb():
-    return "HBNB!"
+    return "HBNB"
 
 
 @app.route('/c/<text>')
@@ -30,7 +31,7 @@ def int(n):
     return "{} is a number".format(n)
 
 
-@app.route('/number_templates/<int:n>')
+@app.route('/number_template/<int:n>')
 def template(n):
     return render_template("5-number.html", n=n)
 
