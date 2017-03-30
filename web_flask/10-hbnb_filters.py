@@ -13,7 +13,7 @@ def hbnb_filters():
 
 
 @app.teardown_appcontext
-def teardown(self):
+def teardown(exc):
     storage.close()
 
 
