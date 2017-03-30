@@ -10,12 +10,12 @@ def states():
     return render_template("9-states.html", states=states)
 
 
-@app.route('/states/<id>')
-def states_wid(id):
+@app.route('/states/<uuid>')
+def states_wid(uuid):
     states = storage.all("State")
     found = ""
     for ids in states:
-        if ids == id:
+        if ids == uuid:
             found = states[ids]
     return render_template("9-states.html", state=found)
 
