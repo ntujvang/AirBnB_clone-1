@@ -29,9 +29,9 @@ class DBStorage:
         db_str = "mysql+mysqldb://{}:{}@{}/{}".format(usr, pwd, host, db)
 
         self.__engine = create_engine(db_str)
-        Session = sessionmaker(bind=self.__engine)
-        Base.metadata.create_all(self.__engine)
-        self.__session = Session()
+#        Session = sessionmaker(bind=self.__engine)
+#        Base.metadata.create_all(self.__engine)
+#        self.__session = Session()
         if env == 'test':
             Base.metadata.drop_all(self.__engine)
 
