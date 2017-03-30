@@ -229,33 +229,28 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("Not a valid command")
 
-    @staticmethod
-    def class_attr(new_obj, args):
-        """
-        This method aids in providing additional information for each
-        valid classes. It accepts an unlimited amount of params per creation.
-        """
-        for key in args:
-            if '=' in key:
-                key = key.split('=')
-                name = key[0]
-                value = key[1]
-                if key[1][0] == '"' and key[1][-1] == '"':
-                    value = key[1][1:-1]
-                    value = value.replace('_', ' ')
+def class_attr(new_obj, args):
+    """
+    This method aids in providing additional information for each
+    valid classes. It accepts an unlimited amount of params per creation.
+    """
+    for key in args:
+        if '=' in key:
+            key = key.split('=')
+            name = key[0]
+            value = key[1]
+            if key[1][0] == '"' and key[1][-1] == '"':
+                value = key[1][1:-1]
+                value = value.replace('_', ' ')
+                setattr(new_obj, name, value)
+            else:
+                try:
+                    value = int(value)
                     setattr(new_obj, name, value)
-                else:
+                except ValueError:
                     try:
-                        value = int(value)
+                        value = float(value)
                         setattr(new_obj, name, value)
                     except ValueError:
-                        try:
-                            value = float(value)
-                            setattr(new_obj, name, value)
-                        except ValueError:
-                            pass
-        return new_obj
-
-
-if __name__ == '__main__':
-    HBNBCommand().cmdloop()
+                        pass
+    return new_obj
