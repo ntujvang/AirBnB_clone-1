@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from models import *
+from models import storage
 from flask import Flask, render_template
 app = Flask(__name__)
 
@@ -11,7 +11,7 @@ def cities_by_states():
 
 
 @app.teardown_appcontext
-def teardown(self):
+def teardown():
     storage.close()
 
 
